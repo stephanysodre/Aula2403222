@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    tools:context=".FormularioPersonagemActivity">
+    tools:context=".iu.activities.FormularioPersonagemActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Nome"
+            android:hint="@string/nome"
             android:inputType="textPersonName"/>
 
     <EditText
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="Altura (1,80)"
+        android:hint="@string/altura_1_80"
         android:inputType="numberDecimal"/>
 
 
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:hint="Nascimento (DD/MM/AAAA)"
+        android:hint="@string/nascimento_dd_mm_aaaa"
         android:inputType="date"/>
 
     </LinearLayout>
