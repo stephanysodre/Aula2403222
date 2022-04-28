@@ -24,19 +24,19 @@ import com.example.aula24_03_2_22.model.Personagem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListaPersonagemActivity extends AppCompatActivity {
-
+// setar strings e arrays
     public static final String TITULO_APPBAR = "Lista de Personagens";
     private final PersonagemDAO dao = new PersonagemDAO();
     private ArrayAdapter<Personagem> adapter;
 
-    @Override
+    @Override // criar visualizaao de layout, salvar instancia
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_personagem);
         configuraFabNovoPersonagem();
         configuraLista();
     }
-
+// ultilizar boatao personagem
     private void configuraFabNovoPersonagem() {
         FloatingActionButton botaoNovoPersoangem = findViewById(R.id.fab_add);
         botaoNovoPersoangem.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +46,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
             }
         });
     }
+    //abrir novo fomulario
    private void abreFormulario() {
         startActivity(new Intent(this,FormularioPersonagemActivity.class));
     }
@@ -55,17 +56,17 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         super.onResume();
         atualizaPersonagem();
     }
-
+// atulaiza a exitencia de um novo personagem
     private void atualizaPersonagem() {
         adapter.clear();
         adapter.addAll(dao.todos());
     }
-
+// remove o personagem
     private void remove(Personagem personagem) {
         dao.remove(personagem);
         adapter.remove(personagem);
     }
-
+//
     @Override
     public void onCreateContextMenu(ContextMenu menu,View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -73,7 +74,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.activity_lista_personagem_menu, menu);
     }
 
-    @Override
+    @Override //parte do menu
     public  boolean onContextItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if(itemId == R.id.activity_lista_personagem_menu_remover) {
@@ -93,14 +94,14 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
+// configuarar lista
     private void configuraLista() {
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
         configuraAdapter(listaDePersonagens);
         configuraItemPorClique(listaDePersonagens);
         registerForContextMenu(listaDePersonagens);
     }
-
+// configurar lista
     private void configuraItemPorClique(ListView listaDePersonagens) {
         listaDePersonagens.setOnItemClickListener((new AdapterView.OnItemClickListener() {
             @Override
@@ -110,13 +111,13 @@ public class ListaPersonagemActivity extends AppCompatActivity {
             }
         }));
     }
-
+//possibilita a ediçao 
     private void abreFormularioEditar(Personagem personagemEscolhido) {
         Intent vaiParaFormulario = new Intent(ListaPersonagemActivity.this,FormularioPersonagemActivity.class);
         vaiParaFormulario.putExtra(CHAVE_PERSONAGEM, personagemEscolhido);
         startActivity(vaiParaFormulario);
     }
-
+//configurar adaptador
     private void configuraAdapter(ListView listaDePersoangem) {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         listaDePersoangem.setAdapter(adapter);
