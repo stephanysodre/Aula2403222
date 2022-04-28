@@ -18,20 +18,23 @@ import com.example.aula24_03_2_22.dao.PersonagemDAO;
 import com.example.aula24_03_2_22.model.Personagem;
 
 public class FormularioPersonagemActivity extends AppCompatActivity {
+    //nao tem apossibilidade de mudar o nome 
     private static final String TITULO_APPBAR_EDITAR_PERSONAGEM = "Editar o Personagem";
     private static final String TITULO_APPBAR_NOVO_PERSONAGEM = "Novo Personagem";
-    private EditText campoNome;
+    // editar campos
+    private EditText campoNome; 
     private EditText campoNascimento;
     private EditText campoAltura;
+    //adicionar novo personagem
     private final PersonagemDAO dao = new PersonagemDAO();
     private Personagem personagem;
-
+//criar menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+//selecionar menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -49,7 +52,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         //configuraBotaoSalvar();
         carregaPersonagem();
     }
-
+//carregar persoangem, dados
     private void carregaPersonagem(){
         Intent dados = getIntent();
         if(dados.hasExtra(CHAVE_PERSONAGEM)){
@@ -61,12 +64,13 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
             personagem = new Personagem();
         }
     }
+    //prencer campos
     private void preencheCampos() {
         campoNome.setText(personagem.getNome());
         campoAltura.setText(personagem.getAltura());
         campoNascimento.setText(personagem.getNascimento());
     }
-
+//final formulario
     private void finalizarFormulario() {
         preencherPersonagem();
         if(personagem.idValido())
@@ -78,6 +82,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         }
         finish();
     }
+    // inicializaçao de campos para digitar
     private void inicializacaoCampos() {
         campoNome = findViewById(R.id.ediText_nome);
         campoNascimento = findViewById(R.id.editText_nascimento);
@@ -91,7 +96,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         MaskTextWatcher mtwNascimento = new MaskTextWatcher(campoAltura, smtNascimento);
         campoNascimento.addTextChangedListener(mtwNascimento);
     }
-
+// para prencher com as informaçoes
     private void preencherPersonagem() {
         String nome = campoNome.getText().toString();
         String nascimento = campoNascimento.getText().toString();
